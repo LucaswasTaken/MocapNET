@@ -20,8 +20,8 @@ STARTDIR=`pwd`
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 #Please give the path to openpose here..
-OPENPOSE_DIR="/home/ammar/Documents/3dParty/openpose/"
-OPENPOSE_BINARY_DIR="/home/ammar/Documents/3dParty/openpose/build/examples/openpose/"
+OPENPOSE_DIR="/content/openpose/"
+OPENPOSE_BINARY_DIR="/content/openpose/build/examples/openpose/"
  
 #Dataset dumping using ffmpeg
 #-----------------------------------------------------------------------------
@@ -50,7 +50,7 @@ FULL_PATH_TO_DATASET=`pwd`
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
 cd $OPENPOSE_DIR
-LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64 $OPENPOSE_BINARY_DIR/openpose.bin -number_people_max 1 --hand --face --write_json $FULL_PATH_TO_DATASET  -image_dir $FULL_PATH_TO_DATASET  $@
+LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64 $OPENPOSE_BINARY_DIR/openpose.bin -number_people_max 1 --hand --face --display 0 --render_pose 0 --write_json  $FULL_PATH_TO_DATASET  -image_dir $FULL_PATH_TO_DATASET  $@
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
@@ -78,7 +78,7 @@ cd ..
 cd "$DIR"
 cd ..
 
-./MocapNET2CSV --from $FULL_PATH_TO_DATASET/2dJoints_v1.4.csv --mt --show 3 --save
+./MocapNET2CSV --from $FULL_PATH_TO_DATASET/2dJoints_v1.4.csv --save --novisualization --hands
 cp out.bvh $FULL_PATH_TO_DATASET/predicted.bvh
 #-----------------------------------------------------------------------------
 #-----------------------------------------------------------------------------
